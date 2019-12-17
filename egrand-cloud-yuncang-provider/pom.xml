@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.egrand.provider</groupId>
+        <artifactId>egrand-provider</artifactId>
+        <version>1.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.egrand.cloud.yuncang.provider</groupId>
+    <artifactId>egrand-cloud-yuncang-provider</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>egrand-cloud-yuncang-file-server</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <egrand.cloud.platform.version>1.1-SNAPSHOT</egrand.cloud.platform.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.egrand.commons</groupId>
+                <artifactId>egrand-commons-core</artifactId>
+                <version>${egrand.cloud.platform.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.egrand.commons</groupId>
+                <artifactId>egrand-commons-starter</artifactId>
+                <version>${egrand.cloud.platform.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.egrand.commons</groupId>
+                <artifactId>egrand-commons-base</artifactId>
+                <version>${egrand.cloud.platform.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
