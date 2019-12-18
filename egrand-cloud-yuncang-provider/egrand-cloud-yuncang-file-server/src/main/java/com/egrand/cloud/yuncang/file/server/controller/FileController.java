@@ -2,7 +2,9 @@ package com.egrand.cloud.yuncang.file.server.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.egrand.cloud.yuncang.file.client.model.ESFileInfo;
 import com.egrand.cloud.yuncang.file.client.model.entity.File;
+import com.egrand.cloud.yuncang.file.server.mq.MqFileService;
 import com.egrand.cloud.yuncang.file.server.service.FileService;
 import com.egrand.core.model.PageParams;
 import com.egrand.core.model.ResultBody;
@@ -10,6 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,6 +32,9 @@ import java.util.Map;
 
     @Autowired
     private FileService targetService;
+
+    @Autowired
+    private MqFileService mqFileService;
 
     /**
     * 获取分页数据
@@ -88,6 +94,10 @@ import java.util.Map;
         entity.setCreaterId(createrId);
         entity.setCreater(creater);
         targetService.save(entity);
+        //TODO 待完善文件的同步到ES
+        ESFileInfo fileInfo = new ESFileInfo();
+        BeanUtils.copyProperties(entity, fileInfo);
+        mqFileService.sendAddFile(fileInfo);
         return ResultBody.ok();
     }
 
